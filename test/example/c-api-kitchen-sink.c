@@ -634,6 +634,13 @@ void test_core() {
   BinaryenFunctionRef sinker =
     BinaryenAddFunction(module, "kitchen()sinker", iiIfF, localTypes, 2, body);
 
+  // Looking up an existing function (traps if not defined)
+  BinaryenFunctionRef sinker2 = BinaryenGetFunction(module, "kitchen()sinker");
+  assert(sinker == sinker2);
+  // Looking up a function that might not be defined (does not trap)
+  BinaryenFunctionRef doesNotExist = BinaryenGetFunctionOrNull(module, "doesNotExist");
+  assert(doesNotExist == NULL);
+
   // Globals
 
   BinaryenAddGlobal(module, "a-global", BinaryenTypeInt32(), 0, makeInt32(module, 7));

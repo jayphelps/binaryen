@@ -526,6 +526,13 @@ function test_core() {
   // Create the function
   var sinker = module.addFunction("kitchen()sinker", iiIfF, [ Binaryen.i32, Binaryen.exnref ], body);
 
+  // Looking up an existing function (traps if not defined)
+  let sinker2 = module.getFunction("kitchen()sinker");
+  assert(sinker == sinker2);
+  // Looking up a function that might not be defined (does not trap)
+  let doesNotExist = module.getFunctionOrNull("doesNotExist");
+  assert(doesNotExist == null);
+
   // Create a global
   var initExpr = module.i32.const(1);
   var global = module.addGlobal("a-global", Binaryen.i32, false, initExpr)

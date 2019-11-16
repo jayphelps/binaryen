@@ -1073,8 +1073,11 @@ BinaryenAddFunction(BinaryenModuleRef module,
                     BinaryenType* varTypes,
                     BinaryenIndex numVarTypes,
                     BinaryenExpressionRef body);
-// Gets a function reference by name.
+// Gets a function reference by name, trapping if it doesn't exist.
 BINARYEN_API BinaryenFunctionRef BinaryenGetFunction(BinaryenModuleRef module,
+                                                     const char* name);
+// Gets a function reference by name if it exists, otherwise returns null.
+BINARYEN_API BinaryenFunctionRef BinaryenGetFunctionOrNull(BinaryenModuleRef module,
                                                      const char* name);
 // Removes a function by name.
 BINARYEN_API void BinaryenRemoveFunction(BinaryenModuleRef module,

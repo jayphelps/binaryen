@@ -2017,6 +2017,11 @@ function wrapModule(module, self) {
       return Module['_BinaryenGetFunction'](module, strToStack(name));
     });
   };
+  self['getFunctionOrNull'] = function(name) {
+    return preserveStack(function() {
+      return Module['_BinaryenGetFunctionOrNull'](module, strToStack(name));
+    });
+  };
   self['removeFunction'] = function(name) {
     return preserveStack(function() {
       return Module['_BinaryenRemoveFunction'](module, strToStack(name));

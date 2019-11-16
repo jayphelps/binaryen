@@ -3149,6 +3149,17 @@ BinaryenFunctionRef BinaryenGetFunction(BinaryenModuleRef module,
   auto* wasm = (Module*)module;
   return wasm->getFunction(name);
 }
+
+BinaryenFunctionRef BinaryenGetFunctionOrNull(BinaryenModuleRef module,
+                                        const char* name) {
+  if (tracing) {
+    std::cout << "  BinaryenGetFunctionOrNull(the_module, \"" << name << "\");\n";
+  }
+
+  auto* wasm = (Module*)module;
+  return wasm->getFunctionOrNull(name);
+}
+
 void BinaryenRemoveFunction(BinaryenModuleRef module, const char* name) {
   if (tracing) {
     std::cout << "  BinaryenRemoveFunction(the_module, \"" << name << "\");\n";
